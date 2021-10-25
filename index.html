@@ -16,6 +16,36 @@
           </p>
       </div>
     </div>
+    <div class="flex-auto" id="stats"></div>
   </div>
 </div>
 <img src="https://api.resultsjunkies.com/noscript.gif?hostname=northstar.resultsjunkies.com&path=%2Fnewtab" alt="" referrerpolicy="no-referrer-when-downgrade" />
+
+<script>
+  fetch('https://simpleanalytics.com/northstar.resultsjunkies.com.json?version=5&fields=pageviews')
+    .then(function (response) {
+      return response.json(); // response type (json)
+    })
+
+    .then(function (data) {
+      appendDataToHTML(data); // function that appends data to HTML
+    })
+
+    .catch(function (err) {
+      console.log(err);
+    });
+
+  function appendDataToHTML(data) {
+    const html =
+      '<div class="flex-auto">' +
+        '<div class="border-4 rounded-lg p-2 m-4">' +
+          '<h4 class="text-lg font-bold">Stats</h4>' +
+            '<p class="mt-1">' +
+                '<b>'+ data.pageviews + '</b> others viewed their stats recently.' +
+            '</p>' +
+        '</div>' +
+      '</div>';
+
+    document.getElementById("stats").innerHTML = html;
+  }
+</script>
