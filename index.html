@@ -36,16 +36,26 @@
     document.getElementById("stats").innerHTML = html;
   }
   
-  window.onload = fetch('https://simpleanalytics.com/northstar.resultsjunkies.com.json?version=5&fields=pageviews')
-    .then(function (response) {
-      return response.json(); // response type (json)
-    })
+  function getStats() {
+    fetch('https://simpleanalytics.com/northstar.resultsjunkies.com.json?version=5&fields=pageviews')
+      .then(function (response) {
+        return response.json(); // response type (json)
+      })
 
-    .then(function (data) {
-      appendDataToHTML(data); // function that appends data to HTML
-    })
+      .then(function (data) {
+        appendDataToHTML(data); // function that appends data to HTML
+      })
 
-    .catch(function (err) {
-      console.log(err);
-    });
-</script>
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+
+  if (window.addEventListener) {
+    window.addEventListener('load', getStats, false);
+  } else if (window.attachEvent) {
+    window.attachEvent('onload', getStats);
+  } else {
+    window.onload = getStats;
+  }
+  </script>
